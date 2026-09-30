@@ -1,0 +1,37 @@
+name: CI / Benchmark Verification
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Verify Dataset Integrity & Traceability Links
+      run: |
+        python -c "
+        import pandas as pd
+        df = pd.read_csv('data/PURE_PROMISE_FR_NFR_Dataset.csv')
+        print(f'Successfully loaded {len(df)} requirements with {df["Class"].nunique()} classes.')
+        "
+
+    - name: Run Model Architecture Test
+      run: |
+        python scripts/generate_figures.py

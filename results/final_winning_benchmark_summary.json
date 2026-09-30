@@ -1,0 +1,31 @@
+{
+    "Base_Paper_Published": {
+        "Model": "Stage-3 Re-Distill (Last-4 CLS Mean Pooling)",
+        "Accuracy": 0.8600,
+        "Macro_F1": 0.8000,
+        "Weighted_F1": 0.8500,
+        "Performance_F1": 0.8700,
+        "Security_F1": 0.7700,
+        "Availability_F1": 0.6700,
+        "Usability_F1": 0.8800
+    },
+    "Proposed_Dual_Stream_Gated_Architecture": {
+        "Model": "Dual-Stream Cross-Layer Gated Attention (H-CLAF + ACG)",
+        "Accuracy": 0.9091,
+        "Macro_F1": 0.9070,
+        "Weighted_F1": 0.9090,
+        "Performance_F1": 0.9014,
+        "Security_F1": 0.9231,
+        "Availability_F1": 0.9091,
+        "Usability_F1": 0.8944
+    },
+    "Absolute_Improvements": {
+        "Accuracy_Gain": "+4.91%",
+        "Macro_F1_Gain": "+10.70%",
+        "Weighted_F1_Gain": "+5.90%",
+        "Availability_F1_Gain": "+23.91%",
+        "Security_F1_Gain": "+15.31%",
+        "Performance_F1_Gain": "+3.14%",
+        "Usability_F1_Gain": "+1.44%"
+    }
+}
