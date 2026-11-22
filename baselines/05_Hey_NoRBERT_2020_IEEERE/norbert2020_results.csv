@@ -1,0 +1,2 @@
+Task,Model,Accuracy,Macro_F1,Weighted_F1,PE_F1,SE_F1,US_F1,A_F1
+"Task 2: 4 Quality Categories (PE, SE, US, A)","NoRBERT (Hey et al., IEEE RE 2020)",78.25,63.78,75.18,80.31,89.23,73.47,12.12

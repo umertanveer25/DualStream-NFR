@@ -1,0 +1,17 @@
+[
+    {
+        "Task": "Task 2: 4 Quality Categories (PE, SE, US, A)",
+        "Model": "RoBERTa_base (Liu et al. 2019)",
+        "Accuracy": 87.66,
+        "Macro_Precision": 89.54,
+        "Macro_Recall": 78.15,
+        "Macro_F1": 79.9,
+        "Weighted_F1": 86.48,
+        "Class_F1s": {
+            "PE": 81.69,
+            "SE": 94.21,
+            "US": 91.33,
+            "A": 52.38
+        }
+    }
+]

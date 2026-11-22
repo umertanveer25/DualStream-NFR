@@ -1,0 +1,245 @@
+[
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "Multinomial Naive Bayes",
+        "Accuracy": 0.9152329749103941,
+        "Macro_Precision": 0.9210641583289207,
+        "Macro_Recall": 0.9052681912681912,
+        "Macro_F1": 0.9103184640001653,
+        "Weighted_F1": 0.9141244218367375
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "Linear SVM (LinearSVC)",
+        "Accuracy": 0.9344086021505376,
+        "Macro_Precision": 0.9382865535126388,
+        "Macro_Recall": 0.9287297297297299,
+        "Macro_F1": 0.9308946905928084,
+        "Weighted_F1": 0.9337028179535658
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "RBF SVM",
+        "Accuracy": 0.9327700972862264,
+        "Macro_Precision": 0.9399219792358805,
+        "Macro_Recall": 0.9235634095634095,
+        "Macro_F1": 0.9286312844272835,
+        "Weighted_F1": 0.9317704421050934
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "Logistic Regression",
+        "Accuracy": 0.8911674347158216,
+        "Macro_Precision": 0.9147557150941052,
+        "Macro_Recall": 0.8701995841995842,
+        "Macro_F1": 0.8808994765275926,
+        "Weighted_F1": 0.887306602465259
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "Random Forest",
+        "Accuracy": 0.8719918074756784,
+        "Macro_Precision": 0.8781727550438804,
+        "Macro_Recall": 0.8582931392931392,
+        "Macro_F1": 0.8636520966359107,
+        "Weighted_F1": 0.8697432639998283
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "Extra Trees",
+        "Accuracy": 0.8959549411162314,
+        "Macro_Precision": 0.9026152386215077,
+        "Macro_Recall": 0.884016632016632,
+        "Macro_F1": 0.8895514656792681,
+        "Weighted_F1": 0.8943889892026965
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "Decision Tree",
+        "Accuracy": 0.7757808499743983,
+        "Macro_Precision": 0.7715221348132599,
+        "Macro_Recall": 0.7703846153846154,
+        "Macro_F1": 0.7687557215661891,
+        "Weighted_F1": 0.7759116502371717
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "SGD Classifier (SVM loss)",
+        "Accuracy": 0.9136712749615976,
+        "Macro_Precision": 0.9181182676140957,
+        "Macro_Recall": 0.9087983367983368,
+        "Macro_F1": 0.9092848378054882,
+        "Weighted_F1": 0.9127591256212633
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs. NFR on 625 requirements)",
+        "Classifier": "MLP Classifier",
+        "Accuracy": 0.9409114183307732,
+        "Macro_Precision": 0.942784745592833,
+        "Macro_Recall": 0.9373014553014553,
+        "Macro_F1": 0.9382084978100732,
+        "Weighted_F1": 0.9405030535917994
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "Multinomial Naive Bayes",
+        "Accuracy": 0.8209523809523809,
+        "Macro_Precision": 0.8012166305916306,
+        "Macro_Recall": 0.7372619047619049,
+        "Macro_F1": 0.7448327367077369,
+        "Weighted_F1": 0.8053936334829193
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "Linear SVM (LinearSVC)",
+        "Accuracy": 0.879047619047619,
+        "Macro_Precision": 0.9158333333333333,
+        "Macro_Recall": 0.8644047619047621,
+        "Macro_F1": 0.8760727507786331,
+        "Weighted_F1": 0.8777204054115819
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "RBF SVM",
+        "Accuracy": 0.8402380952380952,
+        "Macro_Precision": 0.8453075396825398,
+        "Macro_Recall": 0.796904761904762,
+        "Macro_F1": 0.804704019106109,
+        "Weighted_F1": 0.8310525402816424
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "Logistic Regression",
+        "Accuracy": 0.8016666666666665,
+        "Macro_Precision": 0.7639006132756133,
+        "Macro_Recall": 0.7189285714285714,
+        "Macro_F1": 0.7214343295593296,
+        "Weighted_F1": 0.7837928546321404
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "Random Forest",
+        "Accuracy": 0.8111904761904762,
+        "Macro_Precision": 0.8378318903318904,
+        "Macro_Recall": 0.7748809523809524,
+        "Macro_F1": 0.7863057081807082,
+        "Weighted_F1": 0.8068419728419729
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "Extra Trees",
+        "Accuracy": 0.8542857142857143,
+        "Macro_Precision": 0.859345238095238,
+        "Macro_Recall": 0.8292857142857143,
+        "Macro_F1": 0.8335529748029747,
+        "Weighted_F1": 0.8492772122057838
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "Decision Tree",
+        "Accuracy": 0.6773809523809524,
+        "Macro_Precision": 0.684345238095238,
+        "Macro_Recall": 0.6858333333333333,
+        "Macro_F1": 0.6681428620399209,
+        "Weighted_F1": 0.6750054217491193
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "SGD Classifier (SVM loss)",
+        "Accuracy": 0.8592857142857142,
+        "Macro_Precision": 0.8920454545454547,
+        "Macro_Recall": 0.8609523809523811,
+        "Macro_F1": 0.8634369796869799,
+        "Weighted_F1": 0.8563300033300033
+    },
+    {
+        "Task": "Task 2: 4 Quality Requirement Classes (PE, SE, US, A)",
+        "Classifier": "MLP Classifier",
+        "Accuracy": 0.8795238095238096,
+        "Macro_Precision": 0.8997718253968255,
+        "Macro_Recall": 0.8675,
+        "Macro_F1": 0.8697512903762904,
+        "Weighted_F1": 0.8778905353905355
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "Multinomial Naive Bayes",
+        "Accuracy": 0.776847290640394,
+        "Macro_Precision": 0.8111673881673882,
+        "Macro_Recall": 0.7455238095238095,
+        "Macro_F1": 0.7449885217981194,
+        "Weighted_F1": 0.7614149597614821
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "Linear SVM (LinearSVC)",
+        "Accuracy": 0.8084975369458128,
+        "Macro_Precision": 0.8446558441558443,
+        "Macro_Recall": 0.7984285714285714,
+        "Macro_F1": 0.7975186349598113,
+        "Weighted_F1": 0.8010525267296856
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "RBF SVM",
+        "Accuracy": 0.7910098522167488,
+        "Macro_Precision": 0.8393730158730159,
+        "Macro_Recall": 0.7706190476190476,
+        "Macro_F1": 0.7752729171413382,
+        "Weighted_F1": 0.7838594108157565
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "Logistic Regression",
+        "Accuracy": 0.7630541871921183,
+        "Macro_Precision": 0.8224358974358974,
+        "Macro_Recall": 0.7372857142857143,
+        "Macro_F1": 0.7453715989892461,
+        "Weighted_F1": 0.7561214719992972
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "Random Forest",
+        "Accuracy": 0.7112068965517241,
+        "Macro_Precision": 0.7570684315684316,
+        "Macro_Recall": 0.7022380952380952,
+        "Macro_F1": 0.7046544743526167,
+        "Weighted_F1": 0.7086169817926536
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "Extra Trees",
+        "Accuracy": 0.7769704433497537,
+        "Macro_Precision": 0.8118968253968255,
+        "Macro_Recall": 0.7658095238095238,
+        "Macro_F1": 0.7671051054208949,
+        "Weighted_F1": 0.7729485205076664
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "Decision Tree",
+        "Accuracy": 0.5889162561576355,
+        "Macro_Precision": 0.6210548340548341,
+        "Macro_Recall": 0.5893333333333334,
+        "Macro_F1": 0.5865832762009233,
+        "Weighted_F1": 0.5875260628324958
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "SGD Classifier (SVM loss)",
+        "Accuracy": 0.81564039408867,
+        "Macro_Precision": 0.8331904761904761,
+        "Macro_Recall": 0.8210000000000001,
+        "Macro_F1": 0.8147038517038517,
+        "Weighted_F1": 0.8125157693291929
+    },
+    {
+        "Task": "Task 3: Top 5 Most Frequent NFR Classes (US, SE, O, PE, LF)",
+        "Classifier": "MLP Classifier",
+        "Accuracy": 0.8225369458128078,
+        "Macro_Precision": 0.8571875901875903,
+        "Macro_Recall": 0.8196190476190477,
+        "Macro_F1": 0.8195509914921679,
+        "Weighted_F1": 0.819049614480468
+    }
+]

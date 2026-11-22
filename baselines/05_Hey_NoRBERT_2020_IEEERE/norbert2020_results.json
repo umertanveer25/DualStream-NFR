@@ -1,0 +1,17 @@
+[
+    {
+        "Task": "Task 2: 4 Quality Categories (PE, SE, US, A)",
+        "Model": "NoRBERT (Hey et al., IEEE RE 2020)",
+        "Accuracy": 78.25,
+        "Macro_Precision": 83.95,
+        "Macro_Recall": 65.02,
+        "Macro_F1": 63.78,
+        "Weighted_F1": 75.18,
+        "Class_F1s": {
+            "PE": 80.31,
+            "SE": 89.23,
+            "US": 73.47,
+            "A": 12.12
+        }
+    }
+]

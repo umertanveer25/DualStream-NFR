@@ -1,0 +1,2 @@
+Task,Model,Accuracy,Macro_F1,Weighted_F1,PE_F1,SE_F1,US_F1,A_F1
+"Task 2: 4 Quality Categories (PE, SE, US, A)",RoBERTa_base (Liu et al. 2019),87.66,79.9,86.48,81.69,94.21,91.33,52.38

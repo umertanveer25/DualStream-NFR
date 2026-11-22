@@ -1,0 +1,191 @@
+[
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "BERT [CLS] + Linear (Ayed 2024)",
+        "Accuracy": 0.8214285714285714,
+        "Macro_Precision": 0.8386885561708153,
+        "Macro_Recall": 0.7747675097000765,
+        "Macro_F1": 0.7973094146281312,
+        "Weighted_F1": 0.8192059452328679,
+        "Class_F1s": {
+            "PE": 0.7368421052631579,
+            "SE": 0.8682170542635659,
+            "US": 0.8390804597701149,
+            "A": 0.7450980392156863
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "BERT [CLS] + MLP Head",
+        "Accuracy": 0.8344155844155844,
+        "Macro_Precision": 0.8347096889786231,
+        "Macro_Recall": 0.8035532583760514,
+        "Macro_F1": 0.8157003683181926,
+        "Weighted_F1": 0.8338562476170395,
+        "Class_F1s": {
+            "PE": 0.7941176470588235,
+            "SE": 0.8755020080321285,
+            "US": 0.8295454545454546,
+            "A": 0.7636363636363637
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "Linear SVM Baseline",
+        "Accuracy": 0.8798701298701299,
+        "Macro_Precision": 0.8951182664885025,
+        "Macro_Recall": 0.855172165736781,
+        "Macro_F1": 0.8718895070657616,
+        "Weighted_F1": 0.878854411157627,
+        "Class_F1s": {
+            "PE": 0.832,
+            "SE": 0.9147286821705426,
+            "US": 0.8636363636363636,
+            "A": 0.8771929824561403
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "Multinomial Naive Bayes",
+        "Accuracy": 0.7792207792207793,
+        "Macro_Precision": 0.8572176152678194,
+        "Macro_Recall": 0.6712970630717382,
+        "Macro_F1": 0.7048737916219119,
+        "Weighted_F1": 0.7630490302751312,
+        "Class_F1s": {
+            "PE": 0.7368421052631579,
+            "SE": 0.8231292517006803,
+            "US": 0.8095238095238095,
+            "A": 0.45
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "Random Forest Baseline",
+        "Accuracy": 0.788961038961039,
+        "Macro_Precision": 0.8418834436433034,
+        "Macro_Recall": 0.73424820867201,
+        "Macro_F1": 0.7693847234337984,
+        "Weighted_F1": 0.7853264075888036,
+        "Class_F1s": {
+            "PE": 0.7563025210084033,
+            "SE": 0.8394160583941606,
+            "US": 0.7471264367816092,
+            "A": 0.7346938775510204
+        }
+    },
+    {
+        "Task": "Task 2: Binary Classification (FR vs NFR on 969 requirements)",
+        "Model": "BERT [CLS] + Linear (Ayed 2024)",
+        "Accuracy": 0.8771929824561403,
+        "Macro_Precision": 0.8761011565889615,
+        "Macro_Recall": 0.8769369369369369,
+        "Macro_F1": 0.8764725732068539,
+        "Weighted_F1": 0.8772611292770188,
+        "Class_F1s": {
+            "FR": 0.8670391061452514,
+            "NFR": 0.8859060402684564
+        }
+    },
+    {
+        "Task": "Task 2: Binary Classification (FR vs NFR on 969 requirements)",
+        "Model": "Linear SVM Baseline",
+        "Accuracy": 0.8988648090815273,
+        "Macro_Precision": 0.8990210531760812,
+        "Macro_Recall": 0.8971106821106821,
+        "Macro_F1": 0.8979245672419576,
+        "Weighted_F1": 0.8987434875538409,
+        "Class_F1s": {
+            "FR": 0.8881278538812786,
+            "NFR": 0.9077212806026366
+        }
+    },
+    {
+        "Task": "Task 2: Binary Classification (FR vs NFR on 969 requirements)",
+        "Model": "Random Forest Baseline",
+        "Accuracy": 0.8524251805985552,
+        "Macro_Precision": 0.8554524809511701,
+        "Macro_Recall": 0.8478249678249679,
+        "Macro_F1": 0.8500482102681919,
+        "Weighted_F1": 0.8516263627006462,
+        "Class_F1s": {
+            "FR": 0.8311688311688312,
+            "NFR": 0.8689275893675527
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "Logistic Regression",
+        "Accuracy": 0.788961038961039,
+        "Macro_Precision": 0.860443722943723,
+        "Macro_Recall": 0.6910064289557903,
+        "Macro_F1": 0.7278678285540239,
+        "Weighted_F1": 0.7762032688083399,
+        "Class_F1s": {
+            "PE": 0.7652173913043478,
+            "SE": 0.8413793103448276,
+            "US": 0.7810650887573964,
+            "A": 0.5238095238095238
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "SGD Classifier",
+        "Accuracy": 0.8538961038961039,
+        "Macro_Precision": 0.8608285400241319,
+        "Macro_Recall": 0.8344662833838399,
+        "Macro_F1": 0.8461988774174884,
+        "Weighted_F1": 0.8530064431768177,
+        "Class_F1s": {
+            "PE": 0.8188976377952756,
+            "SE": 0.888030888030888,
+            "US": 0.8304093567251462,
+            "A": 0.847457627118644
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "Decision Tree",
+        "Accuracy": 0.6883116883116883,
+        "Macro_Precision": 0.7027926259767785,
+        "Macro_Recall": 0.6867217989747656,
+        "Macro_F1": 0.6934324225216544,
+        "Weighted_F1": 0.6904305085847534,
+        "Class_F1s": {
+            "PE": 0.704,
+            "SE": 0.7569721115537849,
+            "US": 0.5586592178770949,
+            "A": 0.7540983606557377
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "Extra Trees",
+        "Accuracy": 0.8051948051948052,
+        "Macro_Precision": 0.8584632356970406,
+        "Macro_Recall": 0.7786019428474327,
+        "Macro_F1": 0.8087501015300426,
+        "Weighted_F1": 0.8031241902098416,
+        "Class_F1s": {
+            "PE": 0.7796610169491526,
+            "SE": 0.8387096774193549,
+            "US": 0.7439024390243902,
+            "A": 0.8727272727272727
+        }
+    },
+    {
+        "Task": "Task 1: 4 Quality Classes (PE, SE, US, A on 308 requirements)",
+        "Model": "RBF SVM",
+        "Accuracy": 0.8376623376623377,
+        "Macro_Precision": 0.8851255175983437,
+        "Macro_Recall": 0.7899711688238126,
+        "Macro_F1": 0.8225399401016571,
+        "Weighted_F1": 0.8342897353812977,
+        "Class_F1s": {
+            "PE": 0.782608695652174,
+            "SE": 0.875,
+            "US": 0.8248587570621468,
+            "A": 0.8076923076923077
+        }
+    }
+]

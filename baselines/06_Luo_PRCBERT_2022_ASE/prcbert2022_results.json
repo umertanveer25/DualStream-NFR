@@ -1,0 +1,163 @@
+[
+    {
+        "Task": "Task 1: Binary Classification (FR vs NFR on 625 requirements)",
+        "Model": "PRCBERT Prompt-Tuning (Luo 2022)",
+        "Accuracy": 0.8096,
+        "Macro_Precision": 0.8094837261503929,
+        "Macro_Recall": 0.7922628510863805,
+        "Macro_F1": 0.797962648556876,
+        "Weighted_F1": 0.8068846179966044,
+        "Class_F1s": {
+            "FR": 0.7494736842105263,
+            "NFR": 0.8464516129032258
+        }
+    },
+    {
+        "Task": "Task 1: Binary Classification (FR vs NFR on 625 requirements)",
+        "Model": "Linear SVM Baseline",
+        "Accuracy": 0.9344,
+        "Macro_Precision": 0.9351415601738307,
+        "Macro_Recall": 0.928749337572867,
+        "Macro_F1": 0.9316208982545651,
+        "Weighted_F1": 0.9341573800063511,
+        "Class_F1s": {
+            "FR": 0.9178356713426854,
+            "NFR": 0.9454061251664447
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "PRCBERT Prompt-Tuning (Luo 2022)",
+        "Accuracy": 0.7451923076923077,
+        "Macro_Precision": 0.5575033875338753,
+        "Macro_Recall": 0.6165008291873963,
+        "Macro_F1": 0.5845289044515773,
+        "Weighted_F1": 0.7041719041098966,
+        "Class_F1s": {
+            "PE": 0.7222222222222222,
+            "SE": 0.7971014492753623,
+            "US": 0.8187919463087249,
+            "A": 0.0
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "Linear SVM Baseline",
+        "Accuracy": 0.8701923076923077,
+        "Macro_Precision": 0.8934475612107191,
+        "Macro_Recall": 0.8561700875133711,
+        "Macro_F1": 0.8712208555399245,
+        "Weighted_F1": 0.8697038644533861,
+        "Class_F1s": {
+            "PE": 0.8113207547169812,
+            "SE": 0.8837209302325582,
+            "US": 0.8951048951048951,
+            "A": 0.8947368421052632
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "Multinomial Naive Bayes",
+        "Accuracy": 0.8173076923076923,
+        "Macro_Precision": 0.867424529493495,
+        "Macro_Recall": 0.7324928388361225,
+        "Macro_F1": 0.7542329548462359,
+        "Weighted_F1": 0.8060685631903115,
+        "Class_F1s": {
+            "PE": 0.8155339805825242,
+            "SE": 0.8702290076335878,
+            "US": 0.8311688311688312,
+            "A": 0.5
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "Random Forest Baseline",
+        "Accuracy": 0.8076923076923077,
+        "Macro_Precision": 0.8547897897897898,
+        "Macro_Recall": 0.7804475099251218,
+        "Macro_F1": 0.8062755211691381,
+        "Weighted_F1": 0.807539800624907,
+        "Class_F1s": {
+            "PE": 0.8080808080808081,
+            "SE": 0.8085106382978723,
+            "US": 0.8085106382978723,
+            "A": 0.8
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "Logistic Regression",
+        "Accuracy": 0.8173076923076923,
+        "Macro_Precision": 0.8677172607725987,
+        "Macro_Recall": 0.7389262202695038,
+        "Macro_F1": 0.7637683550569214,
+        "Weighted_F1": 0.8078770594197091,
+        "Class_F1s": {
+            "PE": 0.8,
+            "SE": 0.8721804511278195,
+            "US": 0.8311688311688312,
+            "A": 0.5517241379310345
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "SGD Classifier",
+        "Accuracy": 0.8605769230769231,
+        "Macro_Precision": 0.8580235453865341,
+        "Macro_Recall": 0.8624724501590172,
+        "Macro_F1": 0.8595494342841374,
+        "Weighted_F1": 0.8593121353112322,
+        "Class_F1s": {
+            "PE": 0.7766990291262136,
+            "SE": 0.8740740740740741,
+            "US": 0.9037037037037037,
+            "A": 0.8837209302325582
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "Decision Tree",
+        "Accuracy": 0.6778846153846154,
+        "Macro_Precision": 0.6595041499101565,
+        "Macro_Recall": 0.6790793507211418,
+        "Macro_F1": 0.6657485629661267,
+        "Weighted_F1": 0.6793697443775132,
+        "Class_F1s": {
+            "PE": 0.6896551724137931,
+            "SE": 0.7419354838709677,
+            "US": 0.6356589147286822,
+            "A": 0.5957446808510638
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "Extra Trees",
+        "Accuracy": 0.8653846153846154,
+        "Macro_Precision": 0.8965316234334013,
+        "Macro_Recall": 0.8362615135003195,
+        "Macro_F1": 0.858460530020114,
+        "Weighted_F1": 0.8644301559079144,
+        "Class_F1s": {
+            "PE": 0.8514851485148515,
+            "SE": 0.8633093525179856,
+            "US": 0.8857142857142857,
+            "A": 0.8333333333333334
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Classes (PE, SE, US, A on 208 requirements)",
+        "Model": "RBF SVM",
+        "Accuracy": 0.8413461538461539,
+        "Macro_Precision": 0.885243841126194,
+        "Macro_Recall": 0.7992917806350642,
+        "Macro_F1": 0.826330745356813,
+        "Weighted_F1": 0.839626266308078,
+        "Class_F1s": {
+            "PE": 0.8282828282828283,
+            "SE": 0.8702290076335878,
+            "US": 0.8421052631578947,
+            "A": 0.7647058823529411
+        }
+    }
+]

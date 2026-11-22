@@ -1,0 +1,46 @@
+[
+    {
+        "Task": "Task 1: Binary Classification (FR vs NFR on 625 requirements)",
+        "Model": "BERT + BiLSTM + CNN (Kaur & Kaur 2023)",
+        "Accuracy": 0.904,
+        "Macro_Precision": 0.8999725721037197,
+        "Macro_Recall": 0.901854795972443,
+        "Macro_F1": 0.9008733716799188,
+        "Weighted_F1": 0.9041126712908137,
+        "Class_F1s": {
+            "FR": 0.8832684824902723,
+            "NFR": 0.9184782608695652
+        }
+    },
+    {
+        "Task": "Task 2: 4 Quality Categories (PE, SE, US, A on 208 requirements)",
+        "Model": "BERT + BiLSTM + CNN (Kaur & Kaur 2023)",
+        "Accuracy": 0.9134615384615384,
+        "Macro_Precision": 0.9278641134984419,
+        "Macro_Recall": 0.9207300438643722,
+        "Macro_F1": 0.9240118033442809,
+        "Weighted_F1": 0.9136378704735573,
+        "Class_F1s": {
+            "PE": 0.9090909090909091,
+            "SE": 0.9022556390977443,
+            "US": 0.9090909090909091,
+            "A": 0.975609756097561
+        }
+    },
+    {
+        "Task": "Task 3: Top 5 NFR Classes (US, SE, O, PE, LF on 287 requirements)",
+        "Model": "BERT + BiLSTM + CNN (Kaur & Kaur 2023)",
+        "Accuracy": 0.8641114982578397,
+        "Macro_Precision": 0.8591363358645369,
+        "Macro_Recall": 0.8604531065241098,
+        "Macro_F1": 0.8595564014932435,
+        "Weighted_F1": 0.8639272321296894,
+        "Class_F1s": {
+            "US": 0.8461538461538461,
+            "SE": 0.9172932330827067,
+            "O": 0.864,
+            "PE": 0.8545454545454545,
+            "LF": 0.8157894736842105
+        }
+    }
+]
