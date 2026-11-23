@@ -66,6 +66,21 @@ To directly isolate the architectural impact of decoupled dual-stream processing
 
 ---
 
+## 🌐 Cross-Corpus Scalability & Generalization (Table 7)
+
+To evaluate architectural robustness beyond the canonical PROMISE repository, the framework was evaluated under identical 10-fold cross-validation on **PROMISE Extended** ($N = 308$ quality requirements) and the **Large-Scale Industrial FNFC Corpus** ($N = 540$ quality requirements across 7,060 specifications):
+
+| Benchmark Corpus | Evaluated Architecture | Accuracy (%) | Macro-F1 (%) | Weighted-F1 (%) | PE F1 (%) | SE F1 (%) | US F1 (%) | Net Gain ($\Delta$) |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **PROMISE Extended** ($N=308$) | Single-Stream Linear (Base SOTA) | 75.97 | 72.58 | 76.07 | 75.52 | 81.78 | 74.53 | Baseline |
+| | Single-Stream MLP Head | 76.30 | 72.75 | 76.10 | 73.97 | 82.40 | 74.25 | +0.33% Acc |
+| | **Proposed Dual-Stream (Gated Fusion)** | **81.82** | **80.04** | **81.94** | **73.38** | **87.45** | **82.42** | **+5.85% Acc / +7.46% F1** |
+| **FNFC Industrial** ($N=540$) | Single-Stream Linear (Base SOTA) | 64.44 | 60.10 | 64.80 | 58.18 | 78.56 | 56.21 | Baseline |
+| | Single-Stream MLP Head | 65.19 | 60.31 | 65.14 | 61.69 | 78.53 | 52.63 | +0.75% Acc |
+| | **Proposed Dual-Stream (Gated Fusion)** | **72.04** | **69.67** | **72.59** | **68.54** | **80.90** | **66.32** | **+7.60% Acc / +9.57% F1** |
+
+---
+
 ## 📁 Repository Structure
 
 ```text
@@ -87,16 +102,26 @@ DualStream-NFR/
 │   ├── PROMISE_exp.csv                        # PROMISE expanded corpus
 │   ├── train_p1_p10.csv                       # Projects P1-P10 train split
 │   └── test_p11_p15.csv                       # Projects P11-P15 test split
+├── figures/                                   # Publication-ready diagrams (300 DPI)
+│   ├── DualStream_Architecture_Final.png      # Verified Code-Aligned Architecture (Figure 3)
+│   ├── Figure_2_Input_Formulations.png        # Input formulation comparison (Figure 2)
+│   ├── Figure_6_Context_Comparison_Matrix.png # Diagnostic failure confusion matrix (Figure 6)
+│   ├── Figure_7_Per_Class_F1_Comparison.png   # Per-class performance comparison (Figure 7)
+│   └── Figure_8_Gating_Dynamics_and_Failure_Modes.png # Gating distribution & failure modes (Figure 8)
 ├── src/
 │   └── train_dual_stream.py                   # Proposed Dual-Stream architecture, H-CLAF & ACG
 ├── scripts/
 │   ├── comprehensive_side_by_side_all_techniques.py # Full side-by-side single vs dual benchmark
+│   ├── extend_dual_stream_promise_exp_and_fnfc.py   # Multi-corpus scalability benchmark
 │   ├── side_by_side_single_vs_dual.py         # Head-to-head comparison script
 │   ├── run_benchmarks.py                      # Multi-model ablation evaluation
-│   └── generate_figures.py                    # Generates manuscript figures
+│   ├── generate_figures.py                    # Generates manuscript figures 4-7
+│   └── generate_figure_8.py                   # Generates gating dynamics & failure modes figure 8
 └── results/                                   # Verifiable JSON and CSV replication artifacts
     ├── all_techniques_side_by_side_comparison.csv
     ├── all_techniques_side_by_side_comparison.json
+    ├── extended_promise_exp_and_fnfc_results.csv
+    ├── extended_promise_exp_and_fnfc_results.json
     ├── side_by_side_single_vs_dual_results.csv
     └── final_winning_benchmark_summary.json
 ```
@@ -129,6 +154,17 @@ python baselines/06_Luo_PRCBERT_2022_ASE/replicate_prcbert2022.py
 
 # Example: Reproduce Paper 7 (Almohammady et al. - Electronics 2026)
 python baselines/07_Almohammady_ReDistill_2026_Electronics/replicate_redistill2026.py
+```
+
+### 5. Run Cross-Corpus Scalability Benchmark (PROMISE Extended & FNFC)
+```bash
+python scripts/extend_dual_stream_promise_exp_and_fnfc.py
+```
+
+### 6. Generate All Figures
+```bash
+python scripts/generate_figures.py
+python scripts/generate_figure_8.py
 ```
 
 ---
