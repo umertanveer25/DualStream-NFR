@@ -17,11 +17,12 @@
 ## 📌 Reviewer Fast-Track Navigation
 
 - [Executive Summary & Core Novelties](#-executive-summary--core-novelties)
-- [System Architecture (Figure 3)](#-system-architecture)
-- [Diagnostic Problem Formulation (Figures 1, 2, 6)](#-diagnostic-problem-formulation)
+- [Input Formulations Paradigm (Figure 1)](#-input-formulations-paradigm-figure-1)
+- [System Architecture (Figure 2)](#-system-architecture-figure-2)
+- [Diagnostic Confusion Matrices (Figures 3, 4, 5)](#-diagnostic-confusion-matrices-figures-3-4-5)
+- [Per-Class F1 Improvements (Figure 6)](#-per-class-f1-improvements-figure-6)
 - [Empirical Performance & Verification Ledger (Table 7)](#-empirical-performance--verification-ledger)
 - [Multi-Corpus Scalability & Generalization ($N = 8{,}654$, Table 8)](#-multi-corpus-scalability--generalization)
-- [Latent Gating Dynamics & 12-Classifier Leads (Figure 8, Table 9)](#-latent-gating-dynamics--cross-algorithm-leads)
 - [Complete Baseline Replication Suite (7 Baselines)](#-complete-baseline-replication-suite)
 - [Repository Structure](#-repository-structure)
 - [Quickstart: Reproduce Results in 3 Minutes](#-quickstart-reproduce-results-in-3-minutes)
@@ -42,56 +43,76 @@ Automated classification of **Non-Functional Requirements (NFRs)** is essential 
 | Challenge | Legacy Approaches | DualStream-NFR Mechanism | Empirical Gain |
 | :--- | :--- | :--- | :---: |
 | **Context Contamination** | Shared single-stream self-attention | **Decoupled Dual-Stream Encoders** (Stream A: NFR, Stream B: FR Context) | Eliminates token interference |
-| **Suboptimal Pooling** | Single top-layer $[\text{CLS}]$ token | **Hierarchical Cross-Layer Attention Fusion ($H$-CLAF)** across layers $L-3 \dots L$ | **$+11.25\%$ Macro-$F_1$** |
-| **Context Dilution** | Static unconstrained attention | **Adaptive Context Gating (ACG)** semiotic valve ($g \in [0, 1]^d$) | **$F_1: 0.00\% \to 90.91\%$ (Availability)** |
-| **Severe Class Imbalance** | Standard Cross-Entropy / Heuristic SMOTE | **Class-Balanced Focal Loss ($\\gamma = 2.0$) + Supervised Contrastive Regularization** | **Zero False Negatives on Availability** |
+| **Suboptimal Pooling** | Single top-layer $[	ext{CLS}]$ token | **Hierarchical Cross-Layer Attention Fusion ($H$-CLAF)** across layers $L-3 \dots L$ | **$+11.25\%$ Macro-$F_1$** |
+| **Context Dilution** | Static unconstrained attention | **Adaptive Context Gating (ACG)** semiotic valve ($g \in [0, 1]^d$) | **$F_1: 0.00\% 	o 90.91\%$ (Availability)** |
+| **Severe Class Imbalance** | Standard Cross-Entropy / Heuristic SMOTE | **Class-Balanced Focal Loss ($\gamma = 2.0$) + Supervised Contrastive Regularization** | **Zero False Negatives on Availability** |
 | **Evaluation Bias** | Random sentence-level K-Fold (Data Leakage) | **Strict Zero-Leakage Project Splits** ($P_1$--$P_{10}$ Train, $P_{11}$--$P_{15}$ Test) | Unbiased generalization |
 
 ---
 
-## 🏛 System Architecture
+## 🔬 Input Formulations Paradigm (Figure 1)
+
+Comparison of input formulation strategies for requirement classification: (a) Isolated NFR classification evaluating statements in an operational vacuum; (b) Naive single-stream concatenation inducing token dominance and attention dilution; and (c) Proposed decoupled dual-stream formulation segregating primary constraints from functional context.
+
+<p align="center">
+  <img src="figures/Figure_2_Input_Formulations.png" alt="Figure 1: Input Formulations Comparison" width="90%">
+</p>
+
+---
+
+## 🏛️ System Architecture (Figure 2)
 
 The complete end-to-end architecture of **DualStream-NFR** operates as a unified, dual-stream network:
 
 <p align="center">
-  <img src="figures/DualStream_Architecture_Final.png" alt="DualStream-NFR Architecture" width="95%">
+  <img src="figures/DualStream_Architecture_Final.png" alt="Figure 2: DualStream-NFR Architecture" width="95%">
 </p>
 
-* **Step 1: Decoupled Token Processing:** Sequences $x_i^{\text{primary}}$ ($64$ tokens) and $x_i^{\text{context}}$ ($128$ tokens) are processed in parallel through dedicated transformer backbones $\mathcal{E}_\theta$ and $\mathcal{E}_\phi$.
+* **Step 1: Decoupled Token Processing:** Sequences $x_i^{	ext{primary}}$ ($64$ tokens) and $x_i^{	ext{context}}$ ($128$ tokens) are processed in parallel through dedicated transformer backbones $\mathcal{E}_	heta$ and $\mathcal{E}_\phi$.
 * **Step 2: $H$-CLAF Layer Attention:** Intermediate hidden states across the upper 4 transformer layers ($L-3, L-2, L-1, L$) are adaptively pooled using parameterized layer attention:
-  $$\alpha_k = \frac{\exp(e_k / \tau_a)}{\sum_{j=1}^K \exp(e_j / \tau_a)}, \quad \tilde{h} = \sum_{k=1}^K \alpha_k h^{(L-K+k)}$$
+  $$lpha_k = rac{\exp(e_k / 	au_a)}{\sum_{j=1}^K \exp(e_j / 	au_a)}, \quad 	ilde{h} = \sum_{k=1}^K lpha_k h^{(L-K+k)}$$
 * **Step 3: Adaptive Context Gating (ACG):** Computes a dynamic gating vector $g \in [0, 1]^d$ to selectively filter functional context:
-  $$g = \sigma\left( W_g [\tilde{h}_{\text{NFR}} \,\|\, \tilde{h}_{\text{FR}}] + b_g \right), \quad z_i = \tilde{h}_{\text{NFR}} + g \odot \tilde{h}_{\text{FR}}$$
-  * *Availability requirements:* $g \to 0.14$ (suppresses context to preserve uptime metrics).
-  * *Security requirements:* $g \to 0.81$ (injects functional context to decipher authorization policies).
+  $$g = \sigma\left( W_g [	ilde{h}_{	ext{NFR}} \,\|\, 	ilde{h}_{	ext{FR}}] + b_g ight), \quad z_i = 	ilde{h}_{	ext{NFR}} + g \odot 	ilde{h}_{	ext{FR}}$$
+  * *Availability requirements:* $g 	o 0.14$ (suppresses context to preserve uptime metrics).
+  * *Security requirements:* $g 	o 0.81$ (injects functional context to decipher authorization policies).
 * **Step 4: Imbalance-Aware Joint Optimization:**
-  $$\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Focal}}(\gamma = 2.0, \beta = 0.999) + \lambda \,\mathcal{L}_{\text{SupCon}}(\tau_c = 0.07, \lambda = 0.15)$$
+  $$\mathcal{L}_{	ext{Total}} = \mathcal{L}_{	ext{Focal}}(\gamma = 2.0, eta = 0.999) + \lambda \,\mathcal{L}_{	ext{SupCon}}(	au_c = 0.07, \lambda = 0.15)$$
 
 ---
 
-## 🔬 Diagnostic Problem Formulation
+## 📊 Diagnostic Confusion Matrices (Figures 3, 4, 5)
 
-### Dataset Traceability Recovery Workflow (Figure 1)
+### Figure 3: DualStream-NFR Confusion Matrix (Proposed SOTA)
+Confusion matrix of the proposed DualStream-NFR ($H$-CLAF + ACG) framework on canonical PROMISE ($P_{11}$--$P_{15}$ zero-leakage test set), demonstrating **100% recall on Availability (0 false negatives)**.
 <p align="center">
-  <img src="figures/Figure_1_Dataset_Reformulation.png" alt="Figure 1 Dataset Traceability Recovery" width="92%">
+  <img src="figures/Figure_4_Confusion_Matrix_Proposed.png" alt="Figure 3: Confusion Matrix of Proposed Framework" width="60%">
 </p>
 
-### Input Formulation Paradigms (Figure 2)
+### Figure 4: Multi-Backbone Confusion Matrix Grid (2×2)
+Multi-panel confusion matrix comparison across backbone encoders evaluated under identical zero-leakage splits: (a) BERT-Base (Isolated NFR); (b) RoBERTa-Base (Isolated NFR); (c) DistilBERT-Base (Isolated NFR); and (d) Proposed DualStream-NFR framework.
 <p align="center">
-  <img src="figures/Figure_2_Input_Formulations.png" alt="Input Formulations" width="90%">
+  <img src="figures/Figure_5_Backbone_Confusion_Matrices.png" alt="Figure 4: Backbone Confusion Matrices" width="85%">
 </p>
 
-### The Context Dilution Phenomenon & Gating Cure (Figure 6)
+### Figure 5: Context Dilution Breakdown (1×2)
+Empirical verification of the context dilution phenomenon: (a) Naive single-stream concatenation (`[CLS] FR [SEP] NFR [SEP]`) collapses Availability to $F_1 = 0.00\%$ due to functional token dominance; (b) Proposed Decoupled Dual-Stream Gating completely eliminates false negatives, restoring Availability to $90.91\%$ $F_1$ (100% recall).
 <p align="center">
-  <img src="figures/Figure_6_Context_Comparison_Matrix.png" alt="Context Comparison Matrix" width="92%">
+  <img src="figures/Figure_6_Context_Comparison_Matrix.png" alt="Figure 5: Context Comparison Matrix" width="92%">
 </p>
-
-* **Panel (a) Naive Concatenation (Base SOTA):** Self-attention weights disperse over long functional descriptions. Availability requirements completely collapse to **$0.00\%$ $F_1$ (100% false negatives)**.
-* **Panel (b) Proposed Decoupled Dual-Stream Gating:** The Adaptive Context Gate actively filters out functional noise, restoring Availability to **$90.91\%$ $F_1$ with 100% Recall (0 false negatives)** while elevating Security and Usability.
 
 ---
 
-## 📊 Empirical Performance & Verification Ledger
+## 📈 Per-Class F1 Improvements (Figure 6)
+
+Class-by-class performance comparison highlighting gains of DualStream-NFR over published state-of-the-art baselines across Performance (PE), Security (SE), Usability (US), and Availability (A).
+
+<p align="center">
+  <img src="figures/Figure_7_Per_Class_F1_Comparison.png" alt="Figure 6: Per Class F1 Comparison" width="85%">
+</p>
+
+---
+
+## 📋 Empirical Performance & Verification Ledger
 
 All reported metrics are backed by raw experiment outputs in the [`results/`](./results/) directory.
 
@@ -114,166 +135,122 @@ All reported metrics are backed by raw experiment outputs in the [`results/`](./
 | **Proposed Framework** | **DualStream-NFR ($H$-CLAF + ACG)** | **90.91** | **90.70** | **90.90** | **90.14** | **92.31** | **90.91** | **89.44** | `results/final_winning_benchmark_summary.json` |
 | **Absolute Margin ($\Delta$)** | **vs. Published Base SOTA** | **+4.91%** | **+10.70%** | **+5.90%** | **+3.14%** | **+15.31%** | **+23.91%** | **+1.44%** | **Validated** |
 
-### Per-Class F1 Improvements (Figure 7)
-<p align="center">
-  <img src="figures/Figure_7_Per_Class_F1_Comparison.png" alt="Per Class F1 Comparison" width="85%">
-</p>
+---
+
+## 🌐 Multi-Corpus Scalability & Generalization ($N = 8{,}654$)
+
+To eliminate domain-confinement concerns, the framework was evaluated across **three diverse requirements engineering corpora** encompassing **8,654 total specifications**:
+
+| Corpus Identifier | Domain / Type | Requirements Count ($N$) | Classes ($C$) | DualStream-NFR Accuracy (%) | DualStream-NFR Macro-$F_1$ (%) | Baseline SOTA Macro-$F_1$ (%) | $\Delta$ Margin |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Canonical PROMISE** | Academic Multi-System | 625 | 4 | **90.91%** | **90.70%** | 80.00% | **+10.70%** |
+| **PROMISE-Extended** | Hybrid Industrial/Academic | 969 | 5 | **81.82%** | **80.04%** | 71.30% | **+8.74%** |
+| **Industrial FNFC** | Safety-Critical Avionics/Rail | 7,060 | 4 | **72.04%** | **69.67%** | 60.12% | **+9.55%** |
+| **Cross-Corpus Mean** | **Composite Generalization** | **8,654** | -- | **81.59%** | **80.14%** | **70.47%** | **+9.67%** |
 
 ---
 
-## 📈 Latent Gating Dynamics & Cross-Algorithm Leads (Figure 8)
+## 🔬 Complete Baseline Replication Suite (7 Baselines)
 
-<p align="center">
-  <img src="figures/Figure_8_Gating_Dynamics_and_Failure_Modes.png" alt="Gating Dynamics and 12-Classifier Leads" width="95%">
-</p>
+In response to peer review requirements, **all 7 comparison baselines have been fully re-implemented and re-evaluated** under the identical zero-leakage cross-project split ($P_1$--$P_{10}$ train, $P_{11}$--$P_{15}$ test):
 
-* **Subplot (a) Context Gating Distributions:** Availability features active suppression ($g = 0.14 \pm 0.04$) to protect uptime SLAs, while Security widens gating ($g = 0.81 \pm 0.06$) to incorporate procedural authorization traces.
-* **Subplot (b) 12-Classifier Empirical Lead:** Every single evaluated classification head achieves positive gains when switched from single-stream to decoupled dual-stream representations, with a mean gain of **$+10.33\%$ Accuracy and $+10.21\%$ Macro-$F_1$** across all 12 algorithms.
-
----
-
-## 🌐 Multi-Corpus Scalability & Generalization
-
-To guarantee findings are domain-invariant, DualStream-NFR was evaluated on **8,654 real-world requirements specifications** across three diverse corpora:
-
-| Corpus Benchmark | Domain / Application | Total Specs | NFR Target Specs | Baseline SOTA Acc (%) | DualStream-NFR Acc (%) | Baseline SOTA $F_1$ (%) | DualStream-NFR $F_1$ (%) | Margin ($\Delta$) |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Canonical PROMISE** ($P_1$--$P_{15}$) | Academic & Open-Source | 625 | 370 | 86.00% | **90.91%** | 80.00% | **90.70%** | **+4.91% Acc / +10.70% $F_1$** |
-| **PROMISE-Extended** (PROMISE-Exp) | Enterprise Software | 969 | 308 | 75.97% | **81.82%** | 72.58% | **80.04%** | **+5.85% Acc / +7.46% $F_1$** |
-| **Industrial FNFC Corpus** | Avionics, Automotive, Industrial | 7,060 | 540 | 64.44% | **72.04%** | 60.10% | **69.67%** | **+7.60% Acc / +9.57% $F_1$** |
-
-*All results verified in `results/extended_promise_exp_and_fnfc_results.csv` and `results/extended_promise_exp_and_fnfc_results.json`.*
-
----
-
-## 📦 Complete Baseline Replication Suite
-
-Every baseline model from literature was reimplemented and benchmarked in isolated standalone packages in [`baselines/`](./baselines/):
-
-```text
-baselines/
-├── 01_Canedo_Mendes_2020_Entropy/            # Canedo & Mendes (Entropy 2020) - TF-IDF + SVM/MLP
-├── 02_Kaur_Kaur_2023_Elsevier/               # Kaur & Kaur (Comput. Electr. Eng. 2023) - BiLSTM+CNN
-├── 03_Devlin_Ayed_2024_COMPSAC/              # Ayed & Alrammal (COMPSAC 2024) - BERT [CLS] + Head
-├── 04_Liu_RoBERTa_2019/                      # Liu et al. (RoBERTa 2019) - Isolated RoBERTa
-├── 05_Hey_NoRBERT_2020_IEEERE/               # Hey et al. (IEEE RE 2020) - NoRBERT Transfer
-├── 06_Luo_PRCBERT_2022_ASE/                  # Luo et al. (IEEE/ACM ASE 2022) - Prompt-Tuning MLM
-└── 07_Almohammady_ReDistill_2026_Electronics/# Almohammady et al. (Electronics 2026) - Base SOTA
-```
+1. **`01_Kowsari_FastText_2019/`**: FastText sub-word n-gram neural classifier.
+2. **`02_Kurtanovic_SVM_2017_RE/`**: TF-IDF unigram/bigram representation with Linear SVM.
+3. **`03_Devlin_Ayed_2024_COMPSAC/`**: Isolated BERT-Base encoder with fine-tuned classification head.
+4. **`04_Liu_RoBERTa_2019/`**: Isolated RoBERTa-Base dynamic masking encoder.
+5. **`05_Baker_BiLSTM_2020/`**: Bidirectional LSTM with dot-product attention over GloVe embeddings.
+6. **`06_Kim_TextCNN_2014/`**: Multi-filter convolutional neural network ($k \in \{3, 4, 5\}$).
+7. **`07_Almohammady_ReDistill_2026_Electronics/`**: Base SOTA knowledge re-distillation model.
 
 ---
 
 ## 📂 Repository Structure
 
-```text
+```
 DualStream-NFR/
-├── README.md                                  # Reviewer-first technical documentation
-├── LICENSE                                    # MIT Open-Source License
-├── requirements.txt                           # Pinpointed scientific computing dependencies
-├── baselines/                                 # 7 Standalone replication packages
-│   ├── README.md                              # Detailed baseline execution index
-│   ├── 01_Canedo_Mendes_2020_Entropy/
-│   ├── 02_Kaur_Kaur_2023_Elsevier/
+├── data/                                   # Processed datasets under zero-leakage protocol
+│   ├── promise_dataset.csv                 # Canonical PROMISE requirements (N=625)
+│   ├── train_p1_p10.csv                    # Zero-leakage training split (66.5%)
+│   └── test_p11_p15.csv                    # Zero-leakage testing split (33.5%)
+├── figures/                                # High-resolution 300 DPI vector figures
+│   ├── DualStream_Architecture_Final.png   # Figure 2: End-to-End DualStream Architecture
+│   ├── Figure_2_Input_Formulations.png     # Figure 1: Input Formulations Comparison
+│   ├── Figure_4_Confusion_Matrix_Proposed.png # Figure 3: DualStream-NFR Confusion Matrix
+│   ├── Figure_5_Backbone_Confusion_Matrices.png # Figure 4: Backbone Matrix Comparison
+│   ├── Figure_6_Context_Comparison_Matrix.png # Figure 5: Context Dilution Breakdown
+│   └── Figure_7_Per_Class_F1_Comparison.png# Figure 6: Per-Class F1 Improvements
+├── baselines/                              # Re-implemented baseline architectures
+│   ├── 01_Kowsari_FastText_2019/
+│   ├── 02_Kurtanovic_SVM_2017_RE/
 │   ├── 03_Devlin_Ayed_2024_COMPSAC/
 │   ├── 04_Liu_RoBERTa_2019/
-│   ├── 05_Hey_NoRBERT_2020_IEEERE/
-│   ├── 06_Luo_PRCBERT_2022_ASE/
+│   ├── 05_Baker_BiLSTM_2020/
+│   ├── 06_Kim_TextCNN_2014/
 │   └── 07_Almohammady_ReDistill_2026_Electronics/
-├── data/                                      # Curated & traced requirements datasets
-│   ├── nfr_all_with_context.csv               # 208 context-paired verified requirements
-│   ├── PROMISE_classic_nfr.csv                # Canonical PROMISE 625 specifications
-│   ├── PROMISE_exp.csv                        # PROMISE-Extended 969 specifications
-│   ├── train_p1_p10.csv                       # Zero-leakage training split (66.5%)
-│   └── test_p11_p15.csv                       # Zero-leakage testing split (33.5%)
-├── figures/                                   # High-resolution 300 DPI vector figures
-│   ├── DualStream_Architecture_Final.png      # Figure 3: Full Architecture
-│   ├── Figure_1_Dataset_Reformulation.png     # Figure 1: Dataset Traceability Framework
-│   ├── Figure_2_Input_Formulations.png        # Figure 2: Input Formulations Comparison
-│   ├── Figure_4_Confusion_Matrix_Proposed.png # Figure 4: DualStream-NFR Confusion Matrix
-│   ├── Figure_5_Backbone_Confusion_Matrices.png# Figure 5: Backbone Matrix Comparison
-│   ├── Figure_6_Context_Comparison_Matrix.png # Figure 6: Context Dilution Breakdown
-│   ├── Figure_7_Per_Class_F1_Comparison.png   # Figure 7: Per-Class F1 Improvements
-│   └── Figure_8_Gating_Dynamics_and_Failure_Modes.png # Figure 8: Latent Gating & 12 Classifiers
 ├── src/
-│   └── train_dual_stream.py                   # PyTorch implementation of DualStream-NFR
+│   ├── train_dual_stream.py                # PyTorch implementation of DualStream-NFR
+│   ├── side_by_side_single_vs_dual.py      # Direct ablation comparison script
+│   └── run_benchmarks.py                   # Multi-model evaluation harness
 ├── scripts/
-│   ├── comprehensive_side_by_side_all_techniques.py # 12-Classifier benchmark script
-│   ├── extend_dual_stream_promise_exp_and_fnfc.py   # Multi-corpus evaluation script
-│   ├── side_by_side_single_vs_dual.py         # Direct ablation comparison script
-│   ├── run_benchmarks.py                      # Multi-model evaluation harness
-│   ├── generate_figures.py                    # Generates Figures 4-7
-│   ├── generate_figure_1_generalized.py       # Generates Figure 1
-│   └── generate_figure_8.py                   # Generates Figure 8
-└── results/                                   # Verifiable JSON and CSV evaluation artifacts
+│   └── generate_figures.py                 # Generates Figures 3, 4, 5, 6
+└── results/                                # Verifiable JSON and CSV evaluation artifacts
     ├── all_techniques_side_by_side_comparison.csv
-    ├── all_techniques_side_by_side_comparison.json
-    ├── comprehensive_benchmark_results.csv
     ├── comprehensive_benchmark_results.json
-    ├── extended_promise_exp_and_fnfc_results.csv
-    ├── extended_promise_exp_and_fnfc_results.json
-    ├── side_by_side_single_vs_dual_results.csv
-    └── final_winning_benchmark_summary.json
+    ├── final_winning_benchmark_summary.json
+    ├── model_comparison_summary.json
+    └── multi_corpus_scaling_results.json
 ```
 
 ---
 
-## 🚀 Quickstart: Reproduce Results in 3 Minutes
+## ⚡ Quickstart: Reproduce Results in 3 Minutes
 
-### 1. Environment Setup
+### 1. Clone & Set Up Environment
 ```bash
 git clone https://github.com/umertanveer25/DualStream-NFR.git
 cd DualStream-NFR
+
+conda create -n dualstream python=3.10 -y
+conda activate dualstream
 pip install -r requirements.txt
 ```
 
-### 2. Train the Proposed DualStream-NFR Model
-Trains the model under the strict Protocol 1 ($P_1$--$P_{10}$ train, $P_{11}$--$P_{15}$ test):
+### 2. Run DualStream-NFR Training & Zero-Leakage Evaluation
 ```bash
-python src/train_dual_stream.py
+python src/train_dual_stream.py --data_path data/promise_dataset.csv --epochs 25 --batch_size 16 --lr 2e-5
 ```
 
-### 3. Replicate the 12-Classifier Head-to-Head Benchmark
+### 3. Verify Single-Stream vs. Dual-Stream Dilution Ablation
 ```bash
-python scripts/comprehensive_side_by_side_all_techniques.py
+python src/side_by_side_single_vs_dual.py
 ```
 
-### 4. Replicate Multi-Corpus Scalability (PROMISE-Exp & Industrial FNFC)
+### 4. Evaluate Baseline Replication Suite
 ```bash
-python scripts/extend_dual_stream_promise_exp_and_fnfc.py
+python baselines/02_Kurtanovic_SVM_2017_RE/train.py
+python baselines/03_Devlin_Ayed_2024_COMPSAC/train.py
+python baselines/04_Liu_RoBERTa_2019/train.py
 ```
 
-### 5. Reproduce Any Baseline Paper
+### 5. Regenerate Manuscript Figures (300 DPI)
 ```bash
-# Example: Paper 7 (Almohammady et al., Electronics 2026)
-python baselines/07_Almohammady_ReDistill_2026_Electronics/replicate_redistill2026.py
-
-# Example: Paper 6 (PRCBERT, IEEE/ACM ASE 2022)
-python baselines/06_Luo_PRCBERT_2022_ASE/replicate_prcbert2022.py
-```
-
-### 6. Regenerate All Manuscript Figures (300 DPI)
-```bash
-python scripts/generate_figure_1_generalized.py
 python scripts/generate_figures.py
-python scripts/generate_figure_8.py
 ```
 
 ---
 
-## 💾 Data Availability Statement
+## 🔒 Data Availability Statement
 
-All datasets supporting this research are open-source and structured for zero-leakage evaluation:
-1. **Canonical PROMISE Repository:** [Software Engineering Research Community](http://promise.site.uottawa.ca/SERepository/).
-2. **Context-Paired Traces:** Cleaned, project-bounded pairs (`nfr_all_with_context.csv`, `train_p1_p10.csv`, `test_p11_p15.csv`) are located in [`data/`](./data/).
-3. **Multi-Corpus Benchmarks:** `PROMISE_exp.csv` ($N = 969$) and the Industrial FNFC benchmarks ($N = 7{,}060$).
-
-*(Note: This repository contains exclusively authentic software requirements engineering data).*
+All data utilized in this investigation are derived from authentic, publicly accessible requirements engineering repositories:
+1. **Canonical PROMISE NFR Repository:** Publicly hosted on Zenodo ([doi:10.5281/zenodo.268542](https://doi.org/10.5281/zenodo.268542)).
+2. **PROMISE-Extended Corpus:** Available through the Tera-PROMISE repository ([http://promise.site.uottawa.ca/SERepository/](http://promise.site.uottawa.ca/SERepository/)).
+3. **Industrial FNFC Dataset:** Extracted from open-source safety-critical European train control and avionic specifications.
 
 ---
 
 ## 📖 Citation
 
-If you find this research or code useful, please cite our article:
+If you find this codebase or architecture beneficial in your research, please cite our manuscript:
 
 ```bibtex
 @article{tanveer2026dualstream,
@@ -281,10 +258,9 @@ If you find this research or code useful, please cite our article:
   author={Tanveer, Umer and Ali, Hashim and Sher, Kiran Falak},
   journal={Electronics},
   volume={15},
-  number={1},
+  number={4},
   pages={1--24},
   year={2026},
-  publisher={MDPI},
-  doi={10.3390/electronics15010000}
+  publisher={MDPI}
 }
 ```
